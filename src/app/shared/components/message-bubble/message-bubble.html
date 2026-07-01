@@ -1,0 +1,6 @@
+<div class="bubble" [class.bubble--user]="message().sender === 'user'" [class.bubble--ai]="message().sender === 'ai'">
+    <p class="bubble__text">{{ message().text }}</p>
+    <span class="bubble__time">
+        {{ message().timestamp | date: 'shortTime' }}
+    </span>
+</div>

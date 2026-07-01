@@ -1,0 +1,26 @@
+<div class="chat-screen">
+    <aside class="chat-sidebar">
+        <div class="chat-sidebar__brand">DevDoubt</div>
+        <nav class="chat-sidebar__nav">
+            <a class="chat-sidebar__link chat-sidebar__link--active">Ask a question</a>
+            <a class="chat-sidebar__link">Past doubts</a>
+            <a class="chat-sidebar__link">Team dashboard</a>
+        </nav>
+    </aside>
+
+    <main class="chat-main">
+        <div class="chat-main__messages">
+            @for (message of store.messages(); track message.id) {
+            <app-message-bubble [message]="message" />
+            } @empty {
+            <p class="chat-main__empty">No messages yet. Ask your first question!</p>
+            }
+
+            @if (store.isAiTyping()) {
+            <p class="chat-main__typing">AI is typing...</p>
+            }
+        </div>
+
+        <app-chat-input (sent)="onMessageSent($event)" />
+    </main>
+</div>

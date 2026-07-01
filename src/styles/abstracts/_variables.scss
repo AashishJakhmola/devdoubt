@@ -1,0 +1,23 @@
+// Bootstrap color overrides (intentional — Bootstrap expects these)
+$primary: #1a3c5e;
+$secondary: #2e6da4;
+$light: #f0f4f8;
+$dark: #1a1a1a;
+
+// Custom app variables (prefixed with "app-" to avoid colliding with Bootstrap)
+$color-bubble-user-bg: #d6e9ff;
+$color-bubble-user-text: #0c447c;
+$color-bubble-ai-bg: #f1efe8;
+$color-bubble-ai-text: #1a1a1a;
+
+$app-spacing-xs: 4px;
+$app-spacing-sm: 8px;
+$app-spacing-md: 12px;
+$app-spacing-lg: 16px;
+
+$app-radius-sm: 8px;
+$app-radius-md: 10px;
+
+$app-font-size-xs: 10px;
+$app-font-size-sm: 12px;
+$app-font-size-base: 13px;

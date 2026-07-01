@@ -1,0 +1,26 @@
+.bubble {
+  max-width: 70%;
+  padding: $app-spacing-sm $app-spacing-md;
+  border-radius: $app-radius-md;
+  font-size: $app-font-size-base;
+  margin-bottom: $app-spacing-sm;
+
+  &--user {
+    align-self: flex-end;
+    background-color: $color-bubble-user-bg;
+    color: $color-bubble-user-text;
+  }
+
+  &--ai {
+    align-self: flex-start;
+    background-color: $color-bubble-ai-bg;
+    color: $color-bubble-ai-text;
+  }
+}
+
+.bubble__time {
+  display: block;
+  font-size: $app-font-size-xs;
+  opacity: 0.6;
+  margin-top: $app-spacing-xs;
+}

@@ -1,0 +1,7 @@
+<form class="chat-input" (submit)="onSend($event)">
+    <input type="text" class="form-control chat-input__field" placeholder="Type your doubt..."
+        [formControl]="messageControl" />
+    <button type="submit" class="btn btn-primary chat-input__send" [disabled]="messageControl.invalid">
+        Send
+    </button>
+</form>

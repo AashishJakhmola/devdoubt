@@ -1,0 +1,64 @@
+.chat-screen {
+  display: flex;
+  height: 100vh;
+}
+
+.chat-sidebar {
+  width: 220px;
+  border-right: 1px solid #dee2e6;
+  padding: $app-spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $app-spacing-md;
+}
+
+.chat-sidebar__brand {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.chat-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: $app-spacing-xs;
+}
+
+.chat-sidebar__link {
+  padding: $app-spacing-sm $app-spacing-md;
+  border-radius: $app-radius-sm;
+  font-size: $app-font-size-base;
+  color: #555;
+  cursor: pointer;
+
+  &--active {
+    background-color: $color-bubble-user-bg;
+    color: $color-bubble-user-text;
+  }
+}
+
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-main__messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: $app-spacing-lg;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-main__empty {
+  color: #888;
+  font-size: $app-font-size-base;
+  text-align: center;
+  margin-top: $app-spacing-lg;
+}
+
+.chat-main__typing {
+  font-size: $app-font-size-sm;
+  color: #888;
+  font-style: italic;
+}
