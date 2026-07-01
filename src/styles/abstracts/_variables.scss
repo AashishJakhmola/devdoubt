@@ -1,23 +1,66 @@
-// Bootstrap color overrides (intentional — Bootstrap expects these)
+// ─── Bootstrap overrides ───────────────────────────────────────────────────
 $primary: #1a3c5e;
 $secondary: #2e6da4;
-$light: #f0f4f8;
+$light: #f8f9fa;
 $dark: #1a1a1a;
 
-// Custom app variables (prefixed with "app-" to avoid colliding with Bootstrap)
-$color-bubble-user-bg: #d6e9ff;
-$color-bubble-user-text: #0c447c;
-$color-bubble-ai-bg: #f1efe8;
-$color-bubble-ai-text: #1a1a1a;
+// ─── Sidebar ───────────────────────────────────────────────────────────────
+$sidebar-bg: #1a3c5e;
+$sidebar-width: 220px;
+$sidebar-text: #ffffff;
+$sidebar-text-muted: rgba(255, 255, 255, 0.6);
+$sidebar-active-bg: rgba(255, 255, 255, 0.12);
+$sidebar-hover-bg: rgba(255, 255, 255, 0.07);
+$sidebar-border: rgba(255, 255, 255, 0.08);
+$sidebar-icon-bg: #2e6da4;
+$sidebar-avatar-bg: #2e6da4;
 
+// ─── Chat area ─────────────────────────────────────────────────────────────
+$chat-bg: #f8f9fa;
+$chat-header-bg: #ffffff;
+$chat-border: #e9ecef;
+
+// ─── Bubbles ───────────────────────────────────────────────────────────────
+$bubble-user-bg: #1a3c5e;
+$bubble-user-text: #ffffff;
+$bubble-ai-bg: #ffffff;
+$bubble-ai-text: #1a1a1a;
+$bubble-ai-border: #e9ecef;
+$bubble-code-bg: #f1f3f5;
+$bubble-time-color: #adb5bd;
+
+// ─── Avatar ────────────────────────────────────────────────────────────────
+$avatar-user-bg: #d6e9ff;
+$avatar-user-text: #0c447c;
+$avatar-ai-bg: #2e6da4;
+$avatar-size: 30px;
+
+// ─── Typing indicator ──────────────────────────────────────────────────────
+$typing-dot-color: #2e6da4;
+
+// ─── Input bar ─────────────────────────────────────────────────────────────
+$input-bg: #f8f9fa;
+$input-border: #e9ecef;
+$input-border-focus: #2e6da4;
+$send-btn-bg: #1a3c5e;
+
+// ─── Spacing ───────────────────────────────────────────────────────────────
 $app-spacing-xs: 4px;
 $app-spacing-sm: 8px;
 $app-spacing-md: 12px;
 $app-spacing-lg: 16px;
+$app-spacing-xl: 20px;
 
-$app-radius-sm: 8px;
-$app-radius-md: 10px;
+// ─── Border radius ─────────────────────────────────────────────────────────
+$app-radius-sm: 6px;
+$app-radius-md: 8px;
+$app-radius-lg: 12px;
+$app-radius-pill: 24px;
+$app-radius-circle: 50%;
 
-$app-font-size-xs: 10px;
+// ─── Typography ────────────────────────────────────────────────────────────
+$app-font-size-xs: 11px;
 $app-font-size-sm: 12px;
 $app-font-size-base: 13px;
+$app-font-size-md: 14px;
+$app-font-size-lg: 15px;

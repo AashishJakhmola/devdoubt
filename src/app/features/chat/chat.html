@@ -1,15 +1,48 @@
 <div class="chat-screen">
+
     <aside class="chat-sidebar">
-        <div class="chat-sidebar__brand">DevDoubt</div>
+        <div class="chat-sidebar__header">
+            <div class="chat-sidebar__logo">
+                <i class="ti ti-message-2" aria-hidden="true"></i>
+            </div>
+            <p class="chat-sidebar__brand">DevDoubt</p>
+        </div>
+
         <nav class="chat-sidebar__nav">
-            <a class="chat-sidebar__link chat-sidebar__link--active">Ask a question</a>
-            <a class="chat-sidebar__link">Past doubts</a>
-            <a class="chat-sidebar__link">Team dashboard</a>
+            <a class="chat-sidebar__link chat-sidebar__link--active">
+                <i class="ti ti-messages" aria-hidden="true"></i>
+                Ask a question
+            </a>
+            <a class="chat-sidebar__link">
+                <i class="ti ti-history" aria-hidden="true"></i>
+                Past doubts
+            </a>
+            <a class="chat-sidebar__link">
+                <i class="ti ti-chart-bar" aria-hidden="true"></i>
+                Team dashboard
+            </a>
         </nav>
+
+        <div class="chat-sidebar__footer">
+            <div class="chat-sidebar__user">
+                <div class="chat-sidebar__user-avatar">AJ</div>
+                <div>
+                    <p class="chat-sidebar__user-name">Aashish</p>
+                    <p class="chat-sidebar__user-role">Developer</p>
+                </div>
+            </div>
+        </div>
     </aside>
 
     <main class="chat-main">
-        <div class="chat-main__messages">
+
+        <div class="chat-main__header">
+            <i class="ti ti-messages" aria-hidden="true"></i>
+            <span>Ask a question</span>
+        </div>
+
+        <div class="chat-main__messages" #messagesContainer>
+
             @for (message of store.messages(); track message.id) {
             <app-message-bubble [message]="message" />
             } @empty {
@@ -17,10 +50,22 @@
             }
 
             @if (store.isAiTyping()) {
-            <p class="chat-main__typing">AI is typing...</p>
+            <div class="chat-main__typing-wrapper">
+                <div class="message-row__avatar message-row__avatar--ai">
+                    <i class="ti ti-robot" aria-hidden="true"></i>
+                </div>
+                <div class="typing-indicator">
+                    <span class="typing-indicator__dot"></span>
+                    <span class="typing-indicator__dot"></span>
+                    <span class="typing-indicator__dot"></span>
+                </div>
+            </div>
             }
+
         </div>
 
         <app-chat-input (sent)="onMessageSent($event)" />
+
     </main>
+
 </div>

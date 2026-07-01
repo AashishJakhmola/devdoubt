@@ -1,6 +1,23 @@
-<div class="bubble" [class.bubble--user]="message().sender === 'user'" [class.bubble--ai]="message().sender === 'ai'">
-    <p class="bubble__text">{{ message().text }}</p>
-    <span class="bubble__time">
-        {{ message().timestamp | date: 'shortTime' }}
-    </span>
+<div class="message-row" [class.message-row--user]="message().sender === 'user'"
+    [class.message-row--ai]="message().sender === 'ai'">
+
+    @if (message().sender === 'ai') {
+    <div class="message-row__avatar message-row__avatar--ai">
+        <i class="ti ti-robot" aria-hidden="true"></i>
+    </div>
+    }
+
+    <div class="message-row__content">
+        <div class="bubble">
+            <p style="margin:0;">{{ message().text }}</p>
+        </div>
+        <span class="bubble__time">
+            {{ message().timestamp | date: 'shortTime' }}
+        </span>
+    </div>
+
+    @if (message().sender === 'user') {
+    <div class="message-row__avatar message-row__avatar--user">AJ</div>
+    }
+
 </div>
