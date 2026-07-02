@@ -18,10 +18,16 @@ const PORT = process.env.PORT || 3000;
 
 // CORS — allows Angular (port 4200) to talk to this server (port 3000)
 // Without this, the browser blocks all cross-origin requests
-app.use(cors({
-  origin: 'http://localhost:4200',
-  methods: ['GET', 'POST'],
-}));
+app.use(
+  cors({
+    origin: [
+      'http://localhost:4200',
+      'https://devdoubt.vercel.app',
+      'https://devdoubt-evtu1hg9i-aashish-jakhmola.vercel.app',
+    ],
+    methods: ['GET', 'POST'],
+  }),
+);
 
 // JSON parser — automatically parses incoming JSON request bodies
 // So req.body.message works instead of manually parsing raw text
