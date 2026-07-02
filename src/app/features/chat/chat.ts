@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, inject, ViewChild, ElementRef, effect } from '@angular/core';
 import { ChatStore } from '../../core/store/chat.store';
 import { MessageBubbleComponent } from '../../shared/components/message-bubble/message-bubble';
 import { ChatInputComponent } from '../../shared/components/chat-input/chat-input';
@@ -17,6 +17,13 @@ export class ChatComponent {
   @ViewChild('messagesContainer')
   messagesContainer!: ElementRef<HTMLDivElement>;
 
+  constructor() {
+    effect(() => {
+      this.store.messages();
+      setTimeout(() => this.scrollToBottom(), 0);
+    });
+  }
+
   private scrollToBottom(): void {
     try {
       const el = this.messagesContainer?.nativeElement;
@@ -33,7 +40,8 @@ export class ChatComponent {
       text,
       timestamp: new Date(),
     };
+
     this.store.addMessage(userMessage);
-    setTimeout(() => this.scrollToBottom(), 50);
+    this.store.sendToAI(userMessage);
   }
 }
