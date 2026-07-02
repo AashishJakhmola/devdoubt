@@ -9,7 +9,12 @@
 
     <div class="message-row__content">
         <div class="bubble">
+            @if (message().sender === 'ai') {
+            <div class="bubble__markdown" [innerHTML]="message().text | markdown">
+            </div>
+            } @else {
             <p style="margin:0;">{{ message().text }}</p>
+            }
         </div>
         <span class="bubble__time">
             {{ message().timestamp | date: 'shortTime' }}

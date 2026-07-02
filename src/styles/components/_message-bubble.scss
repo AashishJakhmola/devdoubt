@@ -79,3 +79,62 @@ app-message-bubble {
 .message-row--user .bubble__time {
   text-align: right;
 }
+
+.bubble__markdown {
+  font-size: $app-font-size-base;
+  line-height: 1.6;
+  color: $bubble-ai-text;
+
+  p {
+    margin: 0 0 8px 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  strong {
+    font-weight: 600;
+    color: $primary;
+  }
+
+  code {
+    background: $bubble-code-bg;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: $app-font-size-sm;
+    font-family: 'Courier New', monospace;
+    color: #c7254e;
+  }
+
+  pre {
+    background: #1e1e1e;
+    border-radius: $app-radius-md;
+    padding: $app-spacing-md;
+    overflow-x: auto;
+    margin: $app-spacing-sm 0;
+
+    code {
+      background: transparent;
+      color: #d4d4d4;
+      padding: 0;
+      font-size: $app-font-size-sm;
+    }
+  }
+
+  h3 {
+    font-size: $app-font-size-md;
+    font-weight: 600;
+    color: $primary;
+    margin: $app-spacing-md 0 $app-spacing-sm 0;
+  }
+
+  ul,
+  ol {
+    padding-left: 20px;
+    margin: $app-spacing-sm 0;
+
+    li {
+      margin-bottom: 4px;
+    }
+  }
+}
