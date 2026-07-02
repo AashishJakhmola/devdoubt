@@ -1,6 +1,10 @@
 <div class="chat-screen">
 
-    <aside class="chat-sidebar">
+    <!-- Overlay for mobile sidebar -->
+    <div class="chat-sidebar__overlay" [class.is-visible]="isSidebarOpen" (click)="toggleSidebar()">
+    </div>
+
+    <aside class="chat-sidebar" [class.is-open]="isSidebarOpen">
         <div class="chat-sidebar__header">
             <div class="chat-sidebar__logo">
                 <i class="ti ti-message-2" aria-hidden="true"></i>
@@ -9,15 +13,15 @@
         </div>
 
         <nav class="chat-sidebar__nav">
-            <a class="chat-sidebar__link chat-sidebar__link--active">
+            <a class="chat-sidebar__link chat-sidebar__link--active" (click)="closeSidebar()">
                 <i class="ti ti-messages" aria-hidden="true"></i>
                 Ask a question
             </a>
-            <a class="chat-sidebar__link">
+            <a class="chat-sidebar__link" (click)="closeSidebar()">
                 <i class="ti ti-history" aria-hidden="true"></i>
                 Past doubts
             </a>
-            <a class="chat-sidebar__link">
+            <a class="chat-sidebar__link" (click)="closeSidebar()">
                 <i class="ti ti-chart-bar" aria-hidden="true"></i>
                 Team dashboard
             </a>
@@ -37,12 +41,15 @@
     <main class="chat-main">
 
         <div class="chat-main__header">
+            <!-- Hamburger button — only visible on mobile -->
+            <button class="chat-sidebar__toggle" (click)="toggleSidebar()" aria-label="Toggle sidebar">
+                <i class="ti ti-menu-2" aria-hidden="true"></i>
+            </button>
             <i class="ti ti-messages" aria-hidden="true"></i>
             <span>Ask a question</span>
         </div>
 
         <div class="chat-main__messages" #messagesContainer>
-
             @for (message of store.messages(); track message.id) {
             <app-message-bubble [message]="message" />
             } @empty {
@@ -61,7 +68,6 @@
                 </div>
             </div>
             }
-
         </div>
 
         <app-chat-input (sent)="onMessageSent($event)" />

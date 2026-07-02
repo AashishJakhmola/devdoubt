@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild, ElementRef, effect } from '@angular/core';
+import { Component,inject,ViewChild,ElementRef,effect } from '@angular/core';
 import { ChatStore } from '../../core/store/chat.store';
 import { MessageBubbleComponent } from '../../shared/components/message-bubble/message-bubble';
 import { ChatInputComponent } from '../../shared/components/chat-input/chat-input';
@@ -13,6 +13,7 @@ import { ChatMessage } from '../../core/models/message.model';
 })
 export class ChatComponent {
   store = inject(ChatStore);
+  isSidebarOpen = false;
 
   @ViewChild('messagesContainer')
   messagesContainer!: ElementRef<HTMLDivElement>;
@@ -22,6 +23,14 @@ export class ChatComponent {
       this.store.messages();
       setTimeout(() => this.scrollToBottom(), 0);
     });
+  }
+
+  toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  closeSidebar(): void {
+    this.isSidebarOpen = false;
   }
 
   private scrollToBottom(): void {
@@ -40,7 +49,6 @@ export class ChatComponent {
       text,
       timestamp: new Date(),
     };
-
     this.store.addMessage(userMessage);
     this.store.sendToAI(userMessage);
   }
