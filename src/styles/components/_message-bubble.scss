@@ -8,19 +8,24 @@ app-message-bubble {
   align-items: flex-start;
   gap: $app-spacing-sm;
   width: 100%;
+  box-sizing: border-box;
 
   &--user {
-    justify-content: flex-end;
+    flex-direction: row-reverse;
 
     .bubble {
       background: $bubble-user-bg;
       color: $bubble-user-text;
       border-radius: $app-radius-lg 4px $app-radius-lg $app-radius-lg;
     }
+
+    .bubble__time {
+      text-align: right;
+    }
   }
 
   &--ai {
-    justify-content: flex-start;
+    flex-direction: row;
 
     .bubble {
       background: $bubble-ai-bg;
@@ -46,7 +51,6 @@ app-message-bubble {
   &--user {
     background: $avatar-user-bg;
     color: $avatar-user-text;
-    order: 1;
   }
 
   &--ai {
@@ -59,7 +63,7 @@ app-message-bubble {
 .message-row__content {
   display: flex;
   flex-direction: column;
-  max-width: 60%;
+  max-width: 65%;
 }
 
 .bubble {
@@ -74,10 +78,6 @@ app-message-bubble {
   color: $bubble-time-color;
   margin-top: 3px;
   padding: 0 4px;
-}
-
-.message-row--user .bubble__time {
-  text-align: right;
 }
 
 .bubble__markdown {
@@ -95,6 +95,11 @@ app-message-bubble {
   strong {
     font-weight: 600;
     color: $primary;
+  }
+
+  a {
+    color: $secondary;
+    text-decoration: underline;
   }
 
   code {

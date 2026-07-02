@@ -57,7 +57,10 @@
   border-radius: $app-radius-md;
   color: $sidebar-text-muted;
   font-size: $app-font-size-base;
-  text-decoration: none;
+  text-decoration: none !important;
+  &:hover {
+    text-decoration: none !important;
+  }
   cursor: pointer;
   transition:
     background 0.15s ease,
@@ -234,19 +237,19 @@
 
 // ─── Mobile Responsive ─────────────────────────────────────────────────────
 
-// Hamburger button — hidden on desktop, visible on mobile
 .chat-sidebar__toggle {
   display: none;
   background: none;
   border: none;
-  color: $sidebar-text;
+  color: $dark;
   font-size: 22px;
   cursor: pointer;
   padding: 0;
   line-height: 1;
+  align-items: center;
+  justify-content: center;
 }
 
-// Overlay — dark background behind sidebar on mobile
 .chat-sidebar__overlay {
   display: none;
   position: fixed;
@@ -255,27 +258,52 @@
   z-index: 99;
 }
 
+@media (min-width: 769px) {
+  .chat-sidebar {
+    position: relative !important;
+    left: 0 !important;
+  }
+
+  .chat-sidebar__toggle {
+    display: none !important;
+  }
+
+  .chat-sidebar__overlay {
+    display: none !important;
+  }
+}
+
 @media (max-width: 768px) {
-  // Sidebar becomes a fixed overlay drawer on mobile
+  .chat-screen {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
   .chat-sidebar {
     position: fixed;
-    left: -$sidebar-width;
+    left: -250px;
     top: 0;
-    height: 100vh;
+    height: 100dvh;
     z-index: 100;
     transition: left 0.25s ease;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
 
     &.is-open {
       left: 0;
     }
   }
 
-  // Show overlay when sidebar is open
   .chat-sidebar__overlay {
     display: block;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s ease;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
 
     &.is-visible {
       opacity: 1;
@@ -283,37 +311,46 @@
     }
   }
 
-  // Main area takes full width on mobile
   .chat-main {
     width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
   }
 
-  // Mobile header — show hamburger + title
   .chat-main__header {
+    flex-shrink: 0;
     padding: 12px 16px;
-    justify-content: flex-start;
     gap: 12px;
   }
 
-  // Show hamburger toggle on mobile
+  .chat-main__messages {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: $app-spacing-md;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  app-chat-input {
+    flex-shrink: 0;
+    background: #fff;
+  }
+
   .chat-sidebar__toggle {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 32px;
+    height: 32px;
   }
 
-  // Adjust message padding on mobile
-  .chat-main__messages {
-    padding: $app-spacing-md;
-  }
-
-  // Full width bubbles on mobile
   .message-row__content {
-    max-width: 80%;
+    max-width: 85%;
   }
 
-  // Input bar adjustments
   .chat-input-bar {
     padding: $app-spacing-sm $app-spacing-md;
+    padding-bottom: max(#{$app-spacing-sm}, env(safe-area-inset-bottom));
   }
 }

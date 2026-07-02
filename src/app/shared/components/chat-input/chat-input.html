@@ -1,17 +1,8 @@
 <div class="chat-input-bar">
-  <input
-    type="text"
-    class="chat-input-bar__field"
-    placeholder="Type your doubt..."
-    [formControl]="messageControl"
-    (keydown.enter)="onSend($event)"
-  />
-  <button
-    class="chat-input-bar__send"
-    [disabled]="messageControl.invalid"
-    (click)="onSend($event)"
-    aria-label="Send message"
-  >
-    <i class="ti ti-send" aria-hidden="true"></i>
-  </button>
+    <textarea class="chat-input-bar__field" placeholder="Type your doubt..."
+        [formControl]="messageControl" (keydown)="onKeyDown($event)" rows="1" #textareaRef></textarea>
+    <button class="chat-input-bar__send" [disabled]="messageControl.invalid" (click)="onSend($event)"
+        aria-label="Send message">
+        <i class="ti ti-send" aria-hidden="true"></i>
+    </button>
 </div>
