@@ -58,12 +58,8 @@ export class ChatComponent implements OnInit {
       text,
       timestamp: new Date(),
     };
-
     this.store.addMessage(userMessage);
     this.store.sendToAI(userMessage);
-
-    // Save conversation after every message
-    setTimeout(() => this.store.saveConversation(), 100);
   }
 
   startNewChat(): void {

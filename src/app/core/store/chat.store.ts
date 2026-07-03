@@ -97,6 +97,27 @@ export const ChatStore = signalStore(
                   messages: [...state.messages, aiMessage],
                   isAiTyping: false,
                 }));
+
+                // Save AFTER AI message is added to state
+                const messages = store.messages();
+                const id = store.currentConversationId();
+                if (!messages.length || !id) return;
+
+                const firstUserMessage = messages.find((m) => m.sender === 'user');
+                const title = firstUserMessage
+                  ? firstUserMessage.text.slice(0, 50) +
+                    (firstUserMessage.text.length > 50 ? '...' : '')
+                  : 'New conversation';
+
+                const conversation: Conversation = {
+                  id,
+                  title,
+                  messages,
+                  createdAt: new Date(messages[0].timestamp),
+                  updatedAt: new Date(),
+                };
+
+                conversationRepo.save(conversation);
               }),
             );
           }),
