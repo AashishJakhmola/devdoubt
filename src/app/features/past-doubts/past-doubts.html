@@ -1,0 +1,93 @@
+<div class="past-doubts-screen">
+
+  <aside class="chat-sidebar">
+    <div class="chat-sidebar__header">
+      <div class="chat-sidebar__logo">
+        <i class="ti ti-message-2" aria-hidden="true"></i>
+      </div>
+      <p class="chat-sidebar__brand">DevDoubt</p>
+    </div>
+
+    <nav class="chat-sidebar__nav">
+      <a class="chat-sidebar__link" routerLink="/chat">
+        <i class="ti ti-messages" aria-hidden="true"></i>
+        Ask a question
+      </a>
+      <a class="chat-sidebar__link chat-sidebar__link--active">
+        <i class="ti ti-history" aria-hidden="true"></i>
+        Past doubts
+      </a>
+      <a class="chat-sidebar__link">
+        <i class="ti ti-chart-bar" aria-hidden="true"></i>
+        Team dashboard
+      </a>
+    </nav>
+
+    <div class="chat-sidebar__footer">
+      <div class="chat-sidebar__user">
+        <div class="chat-sidebar__user-avatar">AJ</div>
+        <div>
+          <p class="chat-sidebar__user-name">Aashish</p>
+          <p class="chat-sidebar__user-role">Developer</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="past-doubts-main">
+
+    <div class="past-doubts-header">
+      <i class="ti ti-history" aria-hidden="true"></i>
+      <span>Past doubts</span>
+      <button class="past-doubts-header__new" (click)="startNewChat()">
+        <i class="ti ti-plus" aria-hidden="true"></i>
+        New chat
+      </button>
+    </div>
+
+    <div class="past-doubts-content">
+
+      @if (conversations().length === 0) {
+        <div class="past-doubts-empty">
+          <i class="ti ti-message-off" aria-hidden="true"></i>
+          <p>No past conversations yet.</p>
+          <span>Start asking Angular questions and they'll appear here.</span>
+          <button class="btn-start" (click)="startNewChat()">
+            Ask your first question
+          </button>
+        </div>
+      }
+
+      @for (conversation of conversations(); track conversation.id) {
+        <div class="conversation-card" (click)="loadConversation(conversation)">
+
+          <div class="conversation-card__icon">
+            <i class="ti ti-messages" aria-hidden="true"></i>
+          </div>
+
+          <div class="conversation-card__body">
+            <p class="conversation-card__title">{{ conversation.title }}</p>
+            <p class="conversation-card__preview">
+              {{ getMessagePreview(conversation) }}
+            </p>
+            <div class="conversation-card__meta">
+              <span>{{ getMessageCount(conversation) }} question{{getMessageCount(conversation) !== 1 ? 's' : ''}}</span>
+              <span>{{ conversation.updatedAt | date: 'MMM d, h:mm a' }}</span>
+            </div>
+          </div>
+
+          <button
+            class="conversation-card__delete"
+            (click)="deleteConversation($event, conversation.id)"
+            aria-label="Delete conversation">
+            <i class="ti ti-trash" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      }
+
+    </div>
+
+  </main>
+
+</div>

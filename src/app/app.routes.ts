@@ -8,7 +8,12 @@ export const routes: Routes = [
   },
   {
     path: 'chat',
+    loadComponent: () => import('./features/chat/chat').then((m) => m.ChatComponent),
+  },
+  {
+    path: 'past-doubts',
     loadComponent: () =>
-      import('./features/chat/chat').then((m) => m.ChatComponent),
+      import('./features/past-doubts/past-doubts').then((m) => m.PastDoubtsComponent),
   },
 ];
+ 
