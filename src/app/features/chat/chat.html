@@ -1,5 +1,9 @@
 <div class="chat-screen">
 
+    @if (isProfileMenuOpen()) {
+    <div class="profile-menu__backdrop" (click)="closeProfileMenu()"></div>
+    }
+
     <!-- Overlay for mobile sidebar -->
     <div class="chat-sidebar__overlay" [class.is-visible]="isSidebarOpen" (click)="toggleSidebar()">
     </div>
@@ -28,13 +32,40 @@
         </nav>
 
         <div class="chat-sidebar__footer">
-            <div class="chat-sidebar__user">
+
+            @if (isProfileMenuOpen()) {
+            <div class="profile-menu">
+                <div class="profile-menu__header">
+                    <p class="profile-menu__name">Aashish Jakhmola</p>
+                    <p class="profile-menu__email">{{ userEmail() }}</p>
+                </div>
+                <button class="profile-menu__item">
+                    <i class="ti ti-user" aria-hidden="true"></i>
+                    Profile
+                </button>
+                <button class="profile-menu__item">
+                    <i class="ti ti-settings" aria-hidden="true"></i>
+                    Settings
+                </button>
+                <div class="profile-menu__divider"></div>
+                <button class="profile-menu__item profile-menu__item--danger" (click)="signOut()">
+                    <i class="ti ti-logout" aria-hidden="true"></i>
+                    Sign out
+                </button>
+            </div>
+            }
+
+            <div class="chat-sidebar__user" [class.chat-sidebar__user--active]="isProfileMenuOpen()"
+                (click)="toggleProfileMenu()">
                 <div class="chat-sidebar__user-avatar">AJ</div>
-                <div>
+                <div style="flex:1;">
                     <p class="chat-sidebar__user-name">Aashish</p>
                     <p class="chat-sidebar__user-role">Developer</p>
                 </div>
+                <i class="ti chat-sidebar__user-chevron" [class.ti-chevron-up]="!isProfileMenuOpen()"
+                    [class.ti-chevron-down]="isProfileMenuOpen()" aria-hidden="true"></i>
             </div>
+
         </div>
     </aside>
 

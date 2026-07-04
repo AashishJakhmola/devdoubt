@@ -354,3 +354,119 @@
     padding-bottom: max(#{$app-spacing-sm}, env(safe-area-inset-bottom));
   }
 }
+
+// ─── Profile dropdown ──────────────────────────────────────────────────────
+@keyframes menu-pop {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-menu__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: transparent;
+}
+
+.profile-menu {
+  position: absolute;
+  bottom: 64px;
+  left: 10px;
+  width: 200px;
+  background: #fff;
+  border: 1px solid $chat-border;
+  border-radius: $app-radius-md + 2px;
+  padding: 6px;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  animation: menu-pop 0.18s ease both;
+
+  &__header {
+    padding: 10px 12px;
+    border-bottom: 1px solid $chat-border;
+    margin-bottom: 4px;
+  }
+
+  &__name {
+    font-size: $app-font-size-base;
+    font-weight: 500;
+    color: $dark;
+    margin: 0;
+  }
+
+  &__email {
+    font-size: $app-font-size-xs;
+    color: $bubble-time-color;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    background: none;
+    border-radius: $app-radius-sm;
+    font-size: $app-font-size-base;
+    color: $dark;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.12s ease;
+
+    i {
+      font-size: 15px;
+      color: #555; // if this variable doesn't exist use #555
+    }
+
+    &:hover {
+      background: $chat-bg;
+    }
+
+    &--danger {
+      color: #a32d2d;
+
+      i {
+        color: #a32d2d;
+      }
+
+      &:hover {
+        background: #fcebeb;
+      }
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    background: $chat-border;
+    margin: 4px 0;
+  }
+}
+
+.chat-sidebar__user {
+  position: relative;
+
+  &--active {
+    background: $sidebar-active-bg;
+  }
+}
+
+.chat-sidebar__user-chevron {
+  font-size: 14px;
+  color: $sidebar-text-muted;
+  transition: transform 0.15s ease;
+}
+
+.chat-sidebar__footer {
+  position: relative;
+}

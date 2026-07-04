@@ -1,9 +1,10 @@
-import { Component, inject, ViewChild, ElementRef, effect, OnInit } from '@angular/core';
+import { Component, inject, ViewChild, ElementRef, effect, OnInit, signal } from '@angular/core';
 import { ChatStore } from '../../core/store/chat.store';
 import { MessageBubbleComponent } from '../../shared/components/message-bubble/message-bubble';
 import { ChatInputComponent } from '../../shared/components/chat-input/chat-input';
 import { ChatMessage } from '../../core/models/message.model';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { SupabaseService } from '../../core/services/supabase.service';
 
 @Component({
   selector: 'app-chat',
@@ -14,7 +15,12 @@ import { RouterLink } from '@angular/router';
 })
 export class ChatComponent implements OnInit {
   store = inject(ChatStore);
+  private supabase = inject(SupabaseService);
+  private router = inject(Router);
   isSidebarOpen = false;
+
+  isProfileMenuOpen = signal(false);
+  userEmail = signal('');
 
   @ViewChild('messagesContainer')
   messagesContainer!: ElementRef<HTMLDivElement>;
@@ -32,6 +38,19 @@ export class ChatComponent implements OnInit {
     if (!this.store.currentConversationId()) {
       this.store.startNewConversation();
     }
+
+    const user = this.supabase.currentUserValue;
+    if (user?.email) {
+      this.userEmail.set(user.email);
+    }
+  }
+
+  toggleProfileMenu(): void {
+    this.isProfileMenuOpen.set(!this.isProfileMenuOpen());
+  }
+
+  closeProfileMenu(): void {
+    this.isProfileMenuOpen.set(false);
   }
 
   toggleSidebar(): void {
@@ -65,5 +84,11 @@ export class ChatComponent implements OnInit {
   startNewChat(): void {
     this.store.startNewConversation();
     this.closeSidebar();
+  }
+
+  async signOut(): Promise<void> {
+    this.closeProfileMenu();
+    await this.supabase.signOut();
+    this.router.navigate(['/auth']);
   }
 }

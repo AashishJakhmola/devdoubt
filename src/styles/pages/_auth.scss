@@ -1,0 +1,433 @@
+// ─── Animations ────────────────────────────────────────────────────────────
+@keyframes auth-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes auth-float-one {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-14px, 12px);
+  }
+}
+
+@keyframes auth-float-two {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(12px, -14px);
+  }
+}
+
+@keyframes auth-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ─── Layout ────────────────────────────────────────────────────────────────
+.auth-screen {
+  min-height: 100vh;
+  display: flex;
+}
+
+// ─── Left brand panel ──────────────────────────────────────────────────────
+.auth-brand {
+  width: 45%;
+  background: $sidebar-bg;
+  padding: 40px 44px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+
+  &__circle {
+    position: absolute;
+    border-radius: 50%;
+
+    &--one {
+      top: -60px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      background: rgba(46, 109, 164, 0.35);
+      animation: auth-float-one 9s ease-in-out infinite;
+    }
+
+    &--two {
+      bottom: -80px;
+      left: -50px;
+      width: 280px;
+      height: 280px;
+      background: rgba(46, 109, 164, 0.2);
+      animation: auth-float-two 11s ease-in-out infinite;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $app-spacing-sm;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__logo {
+    width: 30px;
+    height: 30px;
+    border-radius: $app-radius-sm;
+    background: $secondary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+  }
+
+  &__name {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    animation: auth-fade-up 0.5s ease both;
+  }
+
+  &__headline {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0 0 12px;
+    max-width: 380px;
+  }
+
+  &__sub {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: $app-font-size-md;
+    line-height: 1.6;
+    margin: 0 0 28px;
+    max-width: 360px;
+  }
+
+  &__features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: $app-font-size-base;
+
+      i {
+        font-size: 15px;
+        color: #9fe1cb;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  &__footer {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: $app-font-size-xs;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// ─── Right form panel ──────────────────────────────────────────────────────
+.auth-panel {
+  flex: 1;
+  background: $chat-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $app-spacing-lg;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  animation: auth-fade-up 0.45s ease 0.1s both;
+
+  &__title {
+    font-size: 24px;
+    font-weight: 600;
+    color: $dark;
+    margin: 0 0 4px;
+  }
+
+  &__subtitle {
+    font-size: $app-font-size-base;
+    color: $bubble-time-color;
+    margin: 0 0 24px;
+  }
+
+  &__error,
+  &__success {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: $app-radius-md;
+    padding: 10px 14px;
+    font-size: $app-font-size-base;
+    margin-bottom: 16px;
+    animation: auth-fade-up 0.3s ease both;
+
+    i {
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+  }
+
+  &__error {
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    color: #c53030;
+  }
+
+  &__success {
+    background: #f0fff4;
+    border: 1px solid #c6f6d5;
+    color: #276749;
+  }
+
+  &__submit {
+    width: 100%;
+    padding: 11px;
+    background: $sidebar-bg;
+    color: #fff;
+    border: none;
+    border-radius: $app-radius-pill;
+    font-size: $app-font-size-md;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 6px;
+    transition:
+      background 0.15s ease,
+      transform 0.1s ease;
+
+    &:hover:not(:disabled) {
+      background: $secondary;
+    }
+    &:active:not(:disabled) {
+      transform: scale(0.99);
+    }
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__spinner {
+    font-size: 16px;
+    animation: auth-spin 0.8s linear infinite;
+  }
+
+  &__divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 18px 0;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: $chat-border;
+    }
+
+    span {
+      font-size: $app-font-size-xs;
+      color: $bubble-time-color;
+    }
+  }
+
+  &__google {
+    width: 100%;
+    padding: 10px;
+    background: #fff;
+    color: $dark;
+    border: 1px solid $input-border;
+    border-radius: $app-radius-pill;
+    font-size: $app-font-size-base;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition:
+      border-color 0.15s ease,
+      background 0.15s ease;
+
+    &__google-icon {
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      border-color: $secondary;
+      background: #fafbfc;
+    }
+  }
+
+  &__toggle {
+    text-align: center;
+    font-size: $app-font-size-base;
+    color: $bubble-time-color;
+    margin: 20px 0 0;
+  }
+
+  &__toggle-btn {
+    background: none;
+    border: none;
+    color: $secondary;
+    font-size: $app-font-size-base;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 4px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ─── Fields ────────────────────────────────────────────────────────────────
+.auth-field {
+  margin-bottom: 16px;
+
+  &__label {
+    display: block;
+    font-size: $app-font-size-sm;
+    font-weight: 500;
+    color: $dark;
+    margin-bottom: 6px;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid $input-border;
+    border-radius: $app-radius-md;
+    padding: 0 12px;
+    background: #fff;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+
+    > i {
+      font-size: 15px;
+      color: $bubble-time-color;
+      flex-shrink: 0;
+    }
+
+    input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 10px 0;
+      font-size: $app-font-size-base;
+      color: $dark;
+      background: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+      &::placeholder {
+        color: $bubble-time-color;
+      }
+    }
+
+    &:focus-within {
+      border-color: $input-border-focus;
+      box-shadow: 0 0 0 3px rgba(46, 109, 164, 0.1);
+    }
+  }
+
+  &__toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    color: $bubble-time-color;
+
+    i {
+      font-size: 15px;
+    }
+
+    &:hover {
+      color: $dark;
+    }
+  }
+
+  &__error {
+    display: block;
+    font-size: $app-font-size-xs;
+    color: #c53030;
+    margin-top: 4px;
+  }
+}
+
+// ─── Mobile ────────────────────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .auth-brand {
+    display: none;
+  }
+
+  .auth-screen {
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .auth-panel {
+    width: 100%;
+    padding: $app-spacing-lg $app-spacing-md;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .auth-card {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    align-self: center;
+    background: #fff;
+    border: 1px solid $chat-border;
+    border-radius: $app-radius-lg;
+    padding: 32px 24px;
+  }
+}
