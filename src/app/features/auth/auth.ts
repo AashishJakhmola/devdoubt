@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SupabaseService } from '../../core/services/supabase.service';
@@ -15,6 +15,7 @@ export class AuthComponent {
   private supabase = inject(SupabaseService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
+  private route = inject(ActivatedRoute);
 
   isLogin = signal(true);
   isLoading = signal(false);
@@ -51,7 +52,8 @@ export class AuthComponent {
       if (this.isLogin()) {
         const { error } = await this.supabase.signIn(email as string, password as string);
         if (error) throw error;
-        this.router.navigate(['/chat']);
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/chat';
+        this.router.navigateByUrl(returnUrl);
       } else {
         const { error } = await this.supabase.signUp(email as string, password as string);
         if (error) throw error;
