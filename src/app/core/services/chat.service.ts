@@ -7,6 +7,7 @@ import { ChatMessage } from '../models/message.model';
 interface ChatRequest {
   message: string;
   history: ChatMessage[];
+  stack: string; // ← added
 }
 
 interface ChatResponse {
@@ -22,18 +23,18 @@ export class ChatService {
 
   sendMessage(
     message: string,
-    history: ChatMessage[]
+    history: ChatMessage[],
+    stack: string, // ← added
   ): Observable<ChatResponse> {
-    const body: ChatRequest = { message, history };
+    const body: ChatRequest = { message, history, stack }; // ← stack included
 
     return this.http.post<ChatResponse>(this.apiUrl, body).pipe(
       catchError((error) => {
         console.error('API error:', error);
         return of({
-          reply:
-            'I am having trouble connecting right now. Please try again in a moment.',
+          reply: 'I am having trouble connecting right now. Please try again in a moment.',
         });
-      })
+      }),
     );
   }
 }

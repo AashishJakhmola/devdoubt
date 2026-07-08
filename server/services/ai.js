@@ -1,17 +1,19 @@
 const OpenAI = require('openai');
-const { SYSTEM_PROMPT } = require('../prompts/system');
+const { buildSystemPrompt } = require('../prompts/system');   // ← was: { SYSTEM_PROMPT }
 
 const client = new OpenAI({
   baseURL: 'https://models.inference.ai.azure.com',
   apiKey: process.env.GITHUB_TOKEN,
 });
 
-const askAI = async (userMessage, history = []) => {
+const askAI = async (userMessage, history = [], stack = 'angular') => {   // ← added `stack`
   try {
-    console.log('Calling GitHub Models with message:', userMessage);
+    console.log(`Calling GitHub Models [stack: ${stack}] with message:`, userMessage);
+
+    const systemPrompt = buildSystemPrompt(stack);   // ← build the right persona
 
     const messages = [
-      { role: 'system', content: SYSTEM_PROMPT },
+      { role: 'system', content: systemPrompt },   // ← was: SYSTEM_PROMPT
       ...history
         .filter((msg) => msg.text && msg.text.trim() !== '')
         .map((msg) => ({

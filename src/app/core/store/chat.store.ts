@@ -11,12 +11,14 @@ interface ChatState {
   messages: ChatMessage[];
   isAiTyping: boolean;
   currentConversationId: string | null;
+  selectedStack: string;
 }
 
 const initialState: ChatState = {
   messages: [],
   isAiTyping: false,
   currentConversationId: null,
+  selectedStack: 'angular',
 };
 
 export const ChatStore = signalStore(
@@ -35,6 +37,11 @@ export const ChatStore = signalStore(
           isAiTyping: false,
           currentConversationId: crypto.randomUUID(),
         });
+      },
+
+      // Set the active tech stack (called when the user picks a pill)
+      setStack(stack: string): void {
+        patchState(store, { selectedStack: stack });
       },
 
       // Load an existing conversation from repository
@@ -85,7 +92,8 @@ export const ChatStore = signalStore(
           tap(() => patchState(store, { isAiTyping: true })),
           switchMap((userMessage) => {
             const history = store.messages().slice(0, -1);
-            return chatService.sendMessage(userMessage.text, history).pipe(
+            const stack = store.selectedStack();
+            return chatService.sendMessage(userMessage.text, history, stack).pipe(
               tap((response) => {
                 const aiMessage: ChatMessage = {
                   id: crypto.randomUUID(),

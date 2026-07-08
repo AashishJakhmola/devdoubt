@@ -3,7 +3,7 @@ import { ChatStore } from '../../core/store/chat.store';
 import { MessageBubbleComponent } from '../../shared/components/message-bubble/message-bubble';
 import { ChatInputComponent } from '../../shared/components/chat-input/chat-input';
 import { ChatMessage } from '../../core/models/message.model';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { SupabaseService } from '../../core/services/supabase.service';
 
 @Component({
@@ -15,6 +15,7 @@ import { SupabaseService } from '../../core/services/supabase.service';
 })
 export class ChatComponent implements OnInit {
   store = inject(ChatStore);
+  private route = inject(ActivatedRoute);
   private supabase = inject(SupabaseService);
   private router = inject(Router);
   isSidebarOpen = false;
@@ -33,6 +34,12 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Read the stack from the URL (?stack=react) if the landing page sent one
+    const stack = this.route.snapshot.queryParamMap.get('stack');
+    if (stack) {
+      this.store.setStack(stack);
+    }
+
     // Start a new conversation when chat loads
     // Only if there isn't already an active conversation
     if (!this.store.currentConversationId()) {

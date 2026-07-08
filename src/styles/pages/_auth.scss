@@ -407,27 +407,32 @@
   }
 
   .auth-screen {
-    align-items: center;
-    justify-content: center;
+    display: block;
     min-height: 100vh;
     min-height: 100dvh;
+    background: #fff;
   }
 
   .auth-panel {
     width: 100%;
-    padding: $app-spacing-lg $app-spacing-md;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: #fff;
+    padding: 48px 24px 40px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .auth-card {
-    max-width: 400px;
+    max-width: 100%;
     width: 100%;
-    height: auto;
-    align-self: center;
-    background: #fff;
-    border: 1px solid $chat-border;
-    border-radius: $app-radius-lg;
-    padding: 32px 24px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    animation: auth-fade-up 0.35s ease both;
   }
 }
